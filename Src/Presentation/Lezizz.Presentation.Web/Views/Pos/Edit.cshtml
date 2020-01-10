@@ -1,0 +1,96 @@
+﻿@model Lezizz.Core.Domain.Entities.Pos
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Pos</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PosId" />
+            <div class="form-group">
+                <label asp-for="PersianName" class="control-label"></label>
+                <input asp-for="PersianName" class="form-control" />
+                <span asp-validation-for="PersianName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EnglishName" class="control-label"></label>
+                <input asp-for="EnglishName" class="form-control" />
+                <span asp-validation-for="EnglishName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TablesCount" class="control-label"></label>
+                <input asp-for="TablesCount" class="form-control" />
+                <span asp-validation-for="TablesCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SeatsCount" class="control-label"></label>
+                <input asp-for="SeatsCount" class="form-control" />
+                <span asp-validation-for="SeatsCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ServiceChargePercent" class="control-label"></label>
+                <input asp-for="ServiceChargePercent" class="form-control" />
+                <span asp-validation-for="ServiceChargePercent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaxChangePercent" class="control-label"></label>
+                <input asp-for="TaxChangePercent" class="form-control" />
+                <span asp-validation-for="TaxChangePercent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VatChangePercent" class="control-label"></label>
+                <input asp-for="VatChangePercent" class="form-control" />
+                <span asp-validation-for="VatChangePercent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TicketNumber" class="control-label"></label>
+                <input asp-for="TicketNumber" class="form-control" />
+                <span asp-validation-for="TicketNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TicketNoDailyReset" /> @Html.DisplayNameFor(model => model.TicketNoDailyReset)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="InvoiceType" class="control-label"></label>
+                <select asp-for="InvoiceType" class="form-control"></select>
+                <span asp-validation-for="InvoiceType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedBy" class="control-label"></label>
+                <input asp-for="CreatedBy" class="form-control" />
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedAt" class="control-label"></label>
+                <input asp-for="CreatedAt" class="form-control" />
+                <span asp-validation-for="CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastModifiedBy" class="control-label"></label>
+                <input asp-for="LastModifiedBy" class="form-control" />
+                <span asp-validation-for="LastModifiedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastModifiedAt" class="control-label"></label>
+                <input asp-for="LastModifiedAt" class="form-control" />
+                <span asp-validation-for="LastModifiedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

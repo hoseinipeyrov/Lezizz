@@ -10,11 +10,5 @@ namespace Lezizz.Presentation.Web.Controllers
         {
             return View();
         }
-
-        [HttpPost]
-        public async Task<ActionResult<int>> Create(CreateFoodCommand command)
-        {
-            return await Mediator.Send(command);
-        }
     }
 }

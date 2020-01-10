@@ -34,10 +34,10 @@ namespace Lezizz.Presentation.Web
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<IApplicationDbContext>())
                 .AddNewtonsoftJson();
            
-            services.AddRouting(option =>
-            {
-                option.LowercaseUrls = true;
-            });
+            //services.AddRouting(option =>
+            //{
+            //    option.LowercaseUrls = true;
+            //});
 
             services.AddApplicationService();
             services.AddInfrastructure(Configuration, Environment);
@@ -106,7 +106,7 @@ namespace Lezizz.Presentation.Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=foods}/{action=index}/{id?}");
+                    pattern: "{controller=home}/{action=index}/{id?}");
             });
         }
     }

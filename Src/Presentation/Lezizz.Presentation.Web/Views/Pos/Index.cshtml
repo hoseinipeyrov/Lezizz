@@ -1,0 +1,151 @@
+﻿@model IEnumerable<Lezizz.Core.Domain.Entities.Pos>
+
+@{
+    ViewData["Title"] = "Index";
+}
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-dashboard"></i> Pos</h1>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item"><a href="#">Pos</a></li>
+        </ul>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <div class="tile p-0">
+                <ul class="nav flex-column nav-tabs user-tabs">
+                    <li class="nav-item"><a class="nav-link active" href="#pos-list" data-toggle="tab">POS List</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#add-new-pos" data-toggle="tab">Add New POS</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="tab-content">
+                <div class="tab-pane active" id="pos-list">
+                    <div class="tile user-settings">
+                        <h4 class="line-head">Pos List</h4>
+                        <table class="table table-hover table-bordered data-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.EnglishName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.TablesCount)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.SeatsCount)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.TicketNumber)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.TicketNoDailyReset)
+                                    </th>
+                                    <th>Commands</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EnglishName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TablesCount)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SeatsCount)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TicketNumber)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TicketNoDailyReset)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.PosId">Edit</a> |
+                                            <a asp-action="Details" asp-route-id="@item.PosId">Details</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.PosId">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="add-new-pos">
+                    <div class="tile user-settings">
+                        <h4 class="line-head">Add New POS</h4>
+                        <form>
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <label>English Name</label>
+                                    <input class="form-control" type="text">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Persian Name</label>
+                                    <input class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <label>Tables Count</label>
+                                    <input class="form-control" type="text">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Seats Count</label>
+                                    <input class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <label>Service Charge Percent</label>
+                                    <input class="form-control" type="text">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Tax Change Percent</label>
+                                    <input class="form-control" type="text">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Vat Change Percent</label>
+                                    <input class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <label>Ticket Number</label>
+                                    <input class="form-control" type="text">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Ticket No Daily Reset</label>
+                                    <div class="toggle-flip">
+                                        <label>
+                                            <input type="checkbox"><span class="flip-indecator" data-toggle-on="NO" data-toggle-off="YES"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Invoice Type</label>
+                                    <input class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <div class="col-md-12">
+                                    <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i> Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+

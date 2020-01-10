@@ -10,6 +10,7 @@ namespace Lezizz.Core.ApplicationService.Common.Interfaces
         public DbSet<TodoList> TodoLists { get; set; }
 
         public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<Pos> Pos { get; set; }
         public DbSet<Food> Foods { get; set; }
 
         public Task<int> SaveChangesAsync(CancellationToken cancellationToken);
