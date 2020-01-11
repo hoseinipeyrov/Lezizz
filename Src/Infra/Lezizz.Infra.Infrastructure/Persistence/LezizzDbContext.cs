@@ -31,7 +31,7 @@ namespace Lezizz.Infra.Infrastructure.Persistence
 
         public DbSet<TodoList> TodoLists { get; set; }
         public DbSet<TodoItem> TodoItems { get; set; }
-        public DbSet<Pos> Pos { get; set; }
+        public DbSet<Pos> Poses { get; set; }
 
         public DbSet<Food> Foods { get; set; }
         public DbSet<FoodCategory> FoodCategories { get; set; }

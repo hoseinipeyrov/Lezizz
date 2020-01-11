@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lezizz.Infra.Infrastructure.Migrations
 {
     [DbContext(typeof(LezizzDbContext))]
-    [Migration("20200109201435_Init")]
+    [Migration("20200111201452_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -236,6 +236,62 @@ namespace Lezizz.Infra.Infrastructure.Migrations
                     b.HasIndex("FoodId");
 
                     b.ToTable("FoodPrice","LZZ");
+                });
+
+            modelBuilder.Entity("Lezizz.Core.Domain.Entities.Pos", b =>
+                {
+                    b.Property<int>("PosId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EnglishName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("InvoiceType")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("LastModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PersianName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<int>("SeatsCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceChargePercent")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TablesCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TaxChangePercent")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("TicketNoDailyReset")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("TicketNumber")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("VatChangePercent")
+                        .HasColumnType("int");
+
+                    b.HasKey("PosId");
+
+                    b.ToTable("Pos","LZZ");
                 });
 
             modelBuilder.Entity("Lezizz.Core.Domain.Entities.TodoItem", b =>

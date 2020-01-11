@@ -4401,9 +4401,9 @@ input[type="button"].btn-block {
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-  color: #495057;
-  background-color: #FFF;
-  border-color: #dee2e6 #dee2e6 #FFF;
+    color: #FFF;
+    background-color: #4d0bb9;
+    border-color: #40089c #40089c #40089c;
 }
 
 .nav-tabs .dropdown-menu {

@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Lezizz.Core.Domain.Entities;
 using Lezizz.Infra.Infrastructure.Persistence;
+using Lezizz.Core.ApplicationService.Poses.Queries;
 
 namespace Lezizz.Presentation.Web.Controllers
 {
-    public class PosController : Controller
+    public class PosController : ApiController
     {
         private readonly LezizzDbContext _context;
 
@@ -22,6 +23,7 @@ namespace Lezizz.Presentation.Web.Controllers
         // GET: Pos
         public async Task<IActionResult> Index()
         {
+            var r= await Mediator.Send(new GetPosQuery());
             var poss = new List<Pos>();
             return View(poss);
         }
@@ -34,7 +36,7 @@ namespace Lezizz.Presentation.Web.Controllers
                 return NotFound();
             }
 
-            var pos = await _context.Pos
+            var pos = await _context.Poses
                 .FirstOrDefaultAsync(m => m.PosId == id);
             if (pos == null)
             {
@@ -74,7 +76,7 @@ namespace Lezizz.Presentation.Web.Controllers
                 return NotFound();
             }
 
-            var pos = await _context.Pos.FindAsync(id);
+            var pos = await _context.Poses.FindAsync(id);
             if (pos == null)
             {
                 return NotFound();
@@ -125,7 +127,7 @@ namespace Lezizz.Presentation.Web.Controllers
                 return NotFound();
             }
 
-            var pos = await _context.Pos
+            var pos = await _context.Poses
                 .FirstOrDefaultAsync(m => m.PosId == id);
             if (pos == null)
             {
@@ -140,15 +142,15 @@ namespace Lezizz.Presentation.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var pos = await _context.Pos.FindAsync(id);
-            _context.Pos.Remove(pos);
+            var pos = await _context.Poses.FindAsync(id);
+            _context.Poses.Remove(pos);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PosExists(int id)
         {
-            return _context.Pos.Any(e => e.PosId == id);
+            return _context.Poses.Any(e => e.PosId == id);
         }
     }
 }

@@ -121,6 +121,33 @@ namespace Lezizz.Infra.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Pos",
+                schema: "LZZ",
+                columns: table => new
+                {
+                    PosId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    LastModifiedBy = table.Column<string>(nullable: true),
+                    LastModifiedAt = table.Column<DateTime>(nullable: true),
+                    PersianName = table.Column<string>(maxLength: 200, nullable: false),
+                    EnglishName = table.Column<string>(nullable: true),
+                    TablesCount = table.Column<int>(nullable: false),
+                    SeatsCount = table.Column<int>(nullable: false),
+                    ServiceChargePercent = table.Column<int>(nullable: false),
+                    TaxChangePercent = table.Column<int>(nullable: false),
+                    VatChangePercent = table.Column<int>(nullable: false),
+                    TicketNumber = table.Column<long>(nullable: false),
+                    TicketNoDailyReset = table.Column<bool>(nullable: false),
+                    InvoiceType = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pos", x => x.PosId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -449,6 +476,10 @@ namespace Lezizz.Infra.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "FoodPrice",
+                schema: "LZZ");
+
+            migrationBuilder.DropTable(
+                name: "Pos",
                 schema: "LZZ");
 
             migrationBuilder.DropTable(

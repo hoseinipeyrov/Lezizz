@@ -22,10 +22,11 @@ namespace Lezizz.Core.ApplicationService.Common.Behaviours
         public async Task Process(TRequest request, CancellationToken cancellationToken)
         {
             var requestName = typeof(TRequest).Name;
-            var userId = _currentUserService.UserId;
+            //var userId = _currentUserService.UserId;
+            var userId = "89106b33-45d5-49da-8064-e223fd1df79d";
             var userName = await _identityService.GetUserNameAsync(userId);
 
-            _logger.LogInformation("CleanArchitecture Request: {Name} {@UserId} {@UserName} {@Request}",
+            _logger.LogInformation("Lezizz Request: {Name} {@UserId} {@UserName} {@Request}",
                 requestName, userId, userName, request);
         }
     }

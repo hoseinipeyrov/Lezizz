@@ -1,10 +1,12 @@
-﻿using Lezizz.Core.Domain.Common;
+﻿using AutoMapper;
+using Lezizz.Core.ApplicationService.Common.Mappings;
+using Lezizz.Core.Domain.Entities;
+using System;
 
-namespace Lezizz.Core.Domain.Entities
+namespace Lezizz.Core.ApplicationService.Poses.Queries
 {
-    public class Pos : AuditableEntity
+    public class PosDto : IMapFrom<Pos>
     {
-        #region Properties
         public int PosId { get; set; }
         public string PersianName { get; set; }
         public string EnglishName { get; set; }
@@ -15,20 +17,12 @@ namespace Lezizz.Core.Domain.Entities
         public int VatChangePercent { get; set; }
         public long TicketNumber { get; set; }
         public bool TicketNoDailyReset { get; set; }
-        public InvoiceType InvoiceType { get; set; }
+        public string InvoiceType { get; set; }
 
-        #endregion
-
-        #region Navigations
-
-        #endregion
-
-
-    }
-
-    public enum InvoiceType
-    {
-        A5 = 1,
-        PosPrinter = 2
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<Pos, PosDto>()
+                .ForMember(d => d.InvoiceType, opt => opt.MapFrom(s => s.EnglishName));
+        }
     }
 }
