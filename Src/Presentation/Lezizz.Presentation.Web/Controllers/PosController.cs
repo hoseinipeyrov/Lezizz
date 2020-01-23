@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Lezizz.Core.Domain.Entities;
 using Lezizz.Infra.Infrastructure.Persistence;
 using Lezizz.Core.ApplicationService.Poses.Queries;
+using Lezizz.Core.ApplicationService.Poses.Commands;
 
 namespace Lezizz.Presentation.Web.Controllers
 {
@@ -23,10 +24,21 @@ namespace Lezizz.Presentation.Web.Controllers
         // GET: Pos
         public async Task<IActionResult> Index()
         {
-            var r= await Mediator.Send(new GetPosQuery());
+            var r = await Mediator.Send(new GetPosQuery());
             var poss = new List<Pos>();
             return View(poss);
         }
+        public IActionResult List()
+        {
+            return View();
+        }
+        public async Task<JsonResult> PosList()
+        {
+            var posVm = await Mediator.Send(new GetPosQuery());
+            return Json(new { data = posVm.PosList });
+        }
+
+
 
         // GET: Pos/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -51,21 +63,37 @@ namespace Lezizz.Presentation.Web.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public async Task<JsonResult> CreatePos(Pos pos)
+        {
+                _context.Add(pos);
+                await _context.SaveChangesAsync();
+                return Json(new { status = true });
+            
+        }
 
         // POST: Pos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("PosId,PersianName,EnglishName,TablesCount,SeatsCount,ServiceChargePercent,TaxChangePercent,VatChangePercent,TicketNumber,TicketNoDailyReset,InvoiceType,CreatedBy,CreatedAt,LastModifiedBy,LastModifiedAt")] Pos pos)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(pos);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(pos);
+        //}
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PosId,PersianName,EnglishName,TablesCount,SeatsCount,ServiceChargePercent,TaxChangePercent,VatChangePercent,TicketNumber,TicketNoDailyReset,InvoiceType,CreatedBy,CreatedAt,LastModifiedBy,LastModifiedAt")] Pos pos)
+        public JsonResult Create([FromBody]CreatePosCommand command)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(pos);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(pos);
+            var r = Mediator.Send(command);
+            return Json("");
         }
 
         // GET: Pos/Edit/5
@@ -120,21 +148,22 @@ namespace Lezizz.Presentation.Web.Controllers
         }
 
         // GET: Pos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var pos = await _context.Poses
                 .FirstOrDefaultAsync(m => m.PosId == id);
             if (pos == null)
             {
-                return NotFound();
+                return Json(new { status = false });
+            }
+            else
+            {
+                _context.Poses.Remove(pos);
+                await _context.SaveChangesAsync();
+                return Json(new { status = true });
             }
 
-            return View(pos);
         }
 
         // POST: Pos/Delete/5
